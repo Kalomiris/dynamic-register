@@ -20,20 +20,17 @@ public class ExtractOcrData {
 
         ITesseract tess = new Tesseract();
         tess.setDatapath("C:\\Program Files\\Tesseract-OCR\\tessdata");
-        tess.setLanguage("eng"); // choose your language
+        tess.setLanguage("ell"); // choose your language
 
         File temp = File.createTempFile("tempfile_", ".png");
         ImageIO.write(ImageIO.read(new ByteArrayInputStream(file.getBytes())), "png", temp);
 
         String result = tess.doOCR(temp);
-        String firstname = result.split("\n")[2].replace(" ", "");
-        String lastname = result.split("\n")[4].replace(" ", "");;
-        out.append(firstname.toUpperCase()).append("\n").append(lastname.toUpperCase());
 
         // Delete temp file
         temp.delete();
 
-        return out.toString();
+        return result;
 
     }
 }
